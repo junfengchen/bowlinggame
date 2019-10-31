@@ -1,12 +1,13 @@
 # Bowling Game
-- A bowling game written with NodeJS
+A bowling game written with NodeJS
 
 How to run:
-
-1) git clone https://github.com/junfengchen/bowlinggame.git
-2) cd bowlinggame
-3) npm install
-4) npm test
+```
+git clone https://github.com/junfengchen/bowlinggame.git
+cd bowlinggame
+npm install
+npm test
+```
 
 The idea:
 
