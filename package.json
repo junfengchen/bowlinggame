@@ -1,0 +1,23 @@
+{
+  "name": "dius_bowling",
+  "version": "1.0.0",
+  "description": "A scoring system for bowling club",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --require @babel/register test/*.js"
+  },
+  "keywords": [
+    "Scoring",
+    "System"
+  ],
+  "author": "Jeffer Chen",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/register": "^7.6.2",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
+  }
+}
