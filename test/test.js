@@ -153,6 +153,7 @@ describe("Score Last Frame", () => {
 
     it("should be the sum of current bowl and two extra bowls if it is a STRIKE", ()=>{
         const bowlingGame = new BowlingGame()
+
         bowlingGame.roll(3)
         bowlingGame.roll(3)
 
@@ -213,6 +214,7 @@ describe("Score Last Frame", () => {
 
         bowlingGame.roll(10)
 
+        // frame 10
         bowlingGame.roll(10)
 
         bowlingGame.roll(10)
