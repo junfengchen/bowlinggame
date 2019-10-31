@@ -1,5 +1,5 @@
-# bowlinggame
-A bowling game written with NodeJS
+# Bowling Game
+- A bowling game written with NodeJS
 
 How to run:
 
@@ -17,12 +17,18 @@ When the game goes over 10 frames, a flag is set to call on the Queue to dump th
 
 The following are the examples of node structure:
 1) one try 
+```
 [ 5, EMPTY ]
+```
 2) SPARE
+```
 [4, 6] // to remove 
 [10, EMPTY]  // to create
+```
 3) STRIKE
+```
 [10, EMPTY, EMPTY]
+```
 
 (Set "DEBUG" in "CalQueue.js" to 'true' to see how the structure is evolved.)
 
