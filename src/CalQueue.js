@@ -1,6 +1,8 @@
 export const EMPTY = -1
 export const MAX = 10
 
+const DEBUG = false
+
 export class CalQueue{
     constructor(){
         this.queue = []
@@ -8,6 +10,9 @@ export class CalQueue{
     }
 
     feedFirst(newNum){     
+        // debug
+        if(DEBUG) this.printStack("before insert " + newNum)
+
         if(newNum===MAX){
             // STRIKE
             this.fill(MAX)
@@ -16,10 +21,19 @@ export class CalQueue{
             this.fill(newNum)
             this.queue.push([newNum, EMPTY])
         }
+
+        // debug
+        if(DEBUG) this.printStack("after insert " + newNum)
     }
 
     feedSecond(newNum){
+        // debug
+        if(DEBUG) this.printStack("before insert " + newNum)
+
         this.fill(newNum)
+
+        // debug
+        if(DEBUG) this.printStack("after insert " + newNum)
     }
 
     getFirstNum(){
@@ -48,7 +62,7 @@ export class CalQueue{
 
             if(!firstItem.includes(EMPTY)){
                 const firstSum = firstItem.reduce((a, b)=>a+b)
-                this.queue.pop()
+                this.queue.shift()
 
                 if(firstItem.length===2 && firstSum===MAX) // SPARE
                     this.queue.push([MAX, EMPTY])
@@ -66,5 +80,17 @@ export class CalQueue{
 
     currentSum(){
         return this.sum
+    }
+
+    printStack(desc){
+        let log = desc + "========SUM " + this.currentSum() + " CLEAR " + this.allClear() +  "\r\n"
+        for(let i=0; i<this.queue.length; i++){
+            log += "|"
+            for(let j=0; j<this.queue[i].length; j++){
+                let sep = (j===0) ? "" : ", "
+                log += sep + ((this.queue[i][j]===EMPTY) ? "E" : this.queue[i][j].toString())
+            }
+        }
+        console.log(log)
     }
 }
