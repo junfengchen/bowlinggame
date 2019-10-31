@@ -3,40 +3,48 @@
  * @author Jeffer Chen
  */
 
-export const FRAME_NOT_STARTED = -1
+import { CalQueue, MAX } from "./CalQueue"
 
 export class BowlingGame{
     constructor(){
-        this.nScore = 0
-        this.nPrePins = FRAME_NOT_STARTED
+        this.newStart = true
+        this.frame = 0
+        this.queue = new CalQueue()
+        this.switchFrame()
     }
 
     roll(noOfPins){
-        let bValid = false;
-        if(noOfPins>=0 && noOfPins<=10)
-            bValid = true;
+        if(noOfPins>10 || noOfPins<0)
+            return false
 
-        if(this.newFrame()){
-            this.nPrePins = noOfPins
-            if(noOfPins===10)
-                this.nPrePins = FRAME_NOT_STARTED
+        if(this.newStart){
+            this.queue.feedFirst(noOfPins)
+            if(noOfPins === MAX)
+                this.switchFrame()
+            else
+                this.newStart = false
         }else{
-            const pinsThisFrame = this.nPrePins + noOfPins
-            this.nPrePins = FRAME_NOT_STARTED
-            if(pinsThisFrame>=0 && pinsThisFrame<=10){
-                bValid = true
-            }else{
-                bValid = false
-            }
+            this.queue.feedSecond(noOfPins)
+            this.switchFrame()
         }
-        return bValid
+
+        return true
+    }
+
+    switchFrame(){
+        this.frame++
+        this.newStart = true
     }
 
     newFrame(){
-        return (this.nPrePins === FRAME_NOT_STARTED)
+        return this.newStart
+    }
+
+    scoreFinalized(){
+        return this.queue.allClear()
     }
 
     score(){
-        return this.nScore
+        return this.queue.currentSum()
     }
 }
