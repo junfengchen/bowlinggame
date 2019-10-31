@@ -106,3 +106,122 @@ describe("Score STRIKE", () => {
         expect(score).to.equal(28) 
     })
 })
+
+
+describe("Score Last Frame", () => {
+    it("should be the sum of the bowls and an extra bowl if it is a SPARE", ()=>{
+        const bowlingGame = new BowlingGame()
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        // frame 10
+        bowlingGame.roll(4)
+        bowlingGame.roll(6)
+
+        bowlingGame.roll(10)
+
+        assert.equal(bowlingGame.scoreFinalized(), true)
+
+        const score = bowlingGame.score()
+        // 6*9 + (4 + 6 + 10) = 74
+        expect(score).to.equal(74) 
+    })
+
+    it("should be the sum of current bowl and two extra bowls if it is a STRIKE", ()=>{
+        const bowlingGame = new BowlingGame()
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        bowlingGame.roll(3)
+        bowlingGame.roll(3)
+
+        // frame 10
+        bowlingGame.roll(10)
+
+        bowlingGame.roll(10)
+        bowlingGame.roll(5)
+
+        assert.equal(bowlingGame.scoreFinalized(), true)
+
+        const score = bowlingGame.score()
+        // 6*9 + (10 + 10 + 5) = 79
+        expect(score).to.equal(79) 
+    })
+
+    it("should be 300 when a strike for every roll", ()=>{
+        const bowlingGame = new BowlingGame()
+        bowlingGame.roll(10)
+
+        bowlingGame.roll(10)
+
+        bowlingGame.roll(10)
+
+        bowlingGame.roll(10)
+
+        bowlingGame.roll(10)
+
+        bowlingGame.roll(10)
+
+        bowlingGame.roll(10)
+
+        bowlingGame.roll(10)
+
+        bowlingGame.roll(10)
+
+        bowlingGame.roll(10)
+
+        bowlingGame.roll(10)
+        bowlingGame.roll(10)
+
+        assert.equal(bowlingGame.scoreFinalized(), true)
+
+        const score = bowlingGame.score()
+        // 300
+        expect(score).to.equal(300) 
+    })
+})

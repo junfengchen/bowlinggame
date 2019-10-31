@@ -17,15 +17,30 @@ export class BowlingGame{
         if(noOfPins>10 || noOfPins<0)
             return false
 
-        if(this.newStart){
-            this.queue.feedFirst(noOfPins)
-            if(noOfPins === MAX)
+        if(this.frame<10){
+            if(this.newStart){
+                this.queue.feedFirst(noOfPins)
+                if(noOfPins === MAX)
+                    this.switchFrame()
+                else
+                    this.newStart = false
+            }else{
+                this.queue.feedSecond(noOfPins)
                 this.switchFrame()
-            else
-                this.newStart = false
+            }
         }else{
-            this.queue.feedSecond(noOfPins)
-            this.switchFrame()
+            if(this.newStart){
+                this.queue.feedFirst(noOfPins)
+                if(noOfPins === MAX){
+                    this.switchFrame()
+                    this.queue.stopGrow()
+                }else
+                    this.newStart = false
+            }else{
+                this.queue.feedSecond(noOfPins)
+                this.switchFrame()
+                this.queue.stopGrow()
+            }
         }
 
         return true

@@ -1,3 +1,8 @@
+/***
+ * @description Bowling Game
+ * @author Jeffer Chen
+ */
+
 export const EMPTY = -1
 export const MAX = 10
 
@@ -7,19 +12,29 @@ export class CalQueue{
     constructor(){
         this.queue = []
         this.sum = 0
+        this.allowGrow = true
     }
 
-    feedFirst(newNum){     
+    stopGrow(){
+        this.allowGrow = false
+    }
+
+    push(item){
+        if(this.allowGrow)
+            this.queue.push(item)
+    }
+
+    feedFirst(newNum){
         // debug
         if(DEBUG) this.printStack("before insert " + newNum)
-
+        
         if(newNum===MAX){
             // STRIKE
             this.fill(MAX)
-            this.queue.push([MAX, EMPTY, EMPTY])
+            this.push([MAX, EMPTY, EMPTY])
         }else{ 
             this.fill(newNum)
-            this.queue.push([newNum, EMPTY])
+            this.push([newNum, EMPTY])
         }
 
         // debug
@@ -65,7 +80,7 @@ export class CalQueue{
                 this.queue.shift()
 
                 if(firstItem.length===2 && firstSum===MAX) // SPARE
-                    this.queue.push([MAX, EMPTY])
+                    this.push([MAX, EMPTY])
                 else{
                     this.sum += firstSum
                 }
